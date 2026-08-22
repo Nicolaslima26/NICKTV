@@ -96,6 +96,7 @@ export class RecentPlaylistsComponent {
     private readonly xtreamRefreshFlow = inject(XtreamRefreshFlowService);
 
     readonly sidebarMode = input(false);
+    readonly managementMode = input(false);
     readonly searchQueryInput = input<string>('');
     readonly playlistClicked = output<string>();
     readonly addPlaylistClicked = output<PlaylistType | undefined>();

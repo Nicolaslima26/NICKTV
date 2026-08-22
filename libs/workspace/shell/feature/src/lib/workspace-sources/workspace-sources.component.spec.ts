@@ -23,6 +23,7 @@ import { WorkspaceSourcesComponent } from './workspace-sources.component';
 })
 class MockRecentPlaylistsComponent {
     readonly searchQueryInput = input('');
+    readonly managementMode = input(false);
     readonly addPlaylistClicked = output<void>();
 }
 
@@ -131,8 +132,9 @@ describe('WorkspaceSourcesComponent', () => {
 
         const header: HTMLElement =
             fixture.nativeElement.querySelector('.sources-header');
-        const meta: HTMLElement =
-            fixture.nativeElement.querySelector('.sources-header__meta');
+        const meta: HTMLElement = fixture.nativeElement.querySelector(
+            '.sources-header__meta'
+        );
         const title: HTMLElement =
             fixture.nativeElement.querySelector('.sources-title');
         const subtitle: HTMLElement =
@@ -153,5 +155,29 @@ describe('WorkspaceSourcesComponent', () => {
             fixture.nativeElement.querySelector('.sources-content');
 
         expect(content.classList.contains('app-scrollbar')).toBe(true);
+    });
+
+    it('opens the add-playlist flow from the persistent header action', async () => {
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const button: HTMLButtonElement =
+            fixture.nativeElement.querySelector('.add-source-button');
+        button.click();
+
+        const actions = TestBed.inject(WORKSPACE_SHELL_ACTIONS);
+        expect(actions.openAddPlaylistDialog).toHaveBeenCalledWith(undefined);
+    });
+
+    it('renders the shared playlist list in management mode', async () => {
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const list = fixture.debugElement.query(
+            (node) =>
+                node.componentInstance instanceof MockRecentPlaylistsComponent
+        );
+
+        expect(list.componentInstance.managementMode()).toBe(true);
     });
 });

@@ -43,6 +43,7 @@ import { PlaylistMeta } from '@iptvnator/shared/interfaces';
 export class PlaylistItemComponent implements OnInit {
     @Input() item!: PlaylistMeta;
     readonly showActions = input(true);
+    readonly managementMode = input(false);
     readonly isDraggable = input(false);
     readonly isSelected = input(false);
     readonly isRefreshing = input(false);
@@ -83,11 +84,12 @@ export class PlaylistItemComponent implements OnInit {
 
     private async checkPortalStatus() {
         if (this.item.serverUrl && this.item.username && this.item.password) {
-            this.portalStatus = await this.portalStatusService.checkPortalStatus(
-                this.item.serverUrl,
-                this.item.username,
-                this.item.password
-            );
+            this.portalStatus =
+                await this.portalStatusService.checkPortalStatus(
+                    this.item.serverUrl,
+                    this.item.username,
+                    this.item.password
+                );
         }
     }
 
@@ -97,6 +99,30 @@ export class PlaylistItemComponent implements OnInit {
 
     getStatusIcon(): string {
         return this.portalStatusService.getStatusIcon(this.portalStatus);
+    }
+
+    get sourceType(): 'M3U' | 'Xtream' | 'Stalker' {
+        if (this.item.macAddress) {
+            return 'Stalker';
+        }
+
+        if (this.item.serverUrl) {
+            return 'Xtream';
+        }
+
+        return 'M3U';
+    }
+
+    get sourceIcon(): string {
+        if (this.item.macAddress) {
+            return 'dashboard';
+        }
+
+        if (this.item.serverUrl) {
+            return 'public';
+        }
+
+        return this.item.url ? 'cloud' : 'folder';
     }
 
     onPlaylistClick(): void {

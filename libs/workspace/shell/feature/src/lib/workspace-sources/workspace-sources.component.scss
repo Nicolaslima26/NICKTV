@@ -31,6 +31,14 @@
     @include panel.standard-panel-subtitle();
 }
 
+.sources-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    app-region: no-drag;
+}
+
 .sort-trigger {
     flex-shrink: 0;
     display: inline-flex;
@@ -48,6 +56,21 @@
         width: 18px;
         height: 18px;
         margin-left: -2px;
+    }
+}
+
+.add-source-button {
+    border-radius: 10px;
+    background: var(--app-selection-border);
+    color: var(--app-selection-color);
+    box-shadow: 0 10px 22px -14px var(--app-selection-glow);
+
+    &:hover {
+        background: color-mix(
+            in srgb,
+            var(--app-selection-border) 84%,
+            var(--app-selection-color)
+        );
     }
 }
 
@@ -92,7 +115,25 @@
         gap: 4px;
     }
 
+    .sources-header__actions {
+        width: 100%;
+    }
+
+    .sort-trigger,
+    .add-source-button {
+        flex: 1;
+    }
+
     .sources-content {
         padding: 12px 16px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sort-trigger__label {
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }

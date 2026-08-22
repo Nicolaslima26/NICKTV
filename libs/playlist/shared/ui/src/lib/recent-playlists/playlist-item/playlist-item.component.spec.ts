@@ -68,6 +68,29 @@ describe('PlaylistItemComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('renders source-management metadata without exposing connection details', () => {
+        component.item = {
+            ...component.item,
+            serverUrl: 'https://provider.example.com',
+            username: 'demo',
+            password: 'secret',
+            updateDate: Date.UTC(2026, 7, 22),
+        };
+        fixture.componentRef.setInput('managementMode', true);
+        fixture.detectChanges();
+
+        const nativeElement = fixture.nativeElement as HTMLElement;
+
+        expect(
+            nativeElement.querySelector('.source-type')?.textContent
+        ).toContain('Xtream');
+        expect(
+            nativeElement.querySelector('.management-meta')?.textContent
+        ).toContain('10');
+        expect(nativeElement.textContent).not.toContain('secret');
+        expect(nativeElement.textContent).not.toContain('provider.example.com');
+    });
+
     it('shows busy UI and suppresses playlist clicks while deleting', () => {
         const emitSpy = jest.spyOn(component.playlistClicked, 'emit');
 
@@ -127,9 +150,7 @@ describe('PlaylistItemComponent', () => {
         fixture.detectChanges();
 
         expect(
-            (fixture.nativeElement as HTMLElement).querySelector(
-                '.refresh-btn'
-            )
+            (fixture.nativeElement as HTMLElement).querySelector('.refresh-btn')
         ).toBeNull();
     });
 
@@ -149,9 +170,7 @@ describe('PlaylistItemComponent', () => {
         fixture.detectChanges();
 
         expect(
-            (fixture.nativeElement as HTMLElement).querySelector(
-                '.refresh-btn'
-            )
+            (fixture.nativeElement as HTMLElement).querySelector('.refresh-btn')
         ).not.toBeNull();
     });
 
@@ -173,9 +192,7 @@ describe('PlaylistItemComponent', () => {
         fixture.detectChanges();
 
         expect(
-            (fixture.nativeElement as HTMLElement).querySelector(
-                '.refresh-btn'
-            )
+            (fixture.nativeElement as HTMLElement).querySelector('.refresh-btn')
         ).not.toBeNull();
 
         fixture.destroy();
@@ -195,9 +212,7 @@ describe('PlaylistItemComponent', () => {
         fixture.detectChanges();
 
         expect(
-            (fixture.nativeElement as HTMLElement).querySelector(
-                '.refresh-btn'
-            )
+            (fixture.nativeElement as HTMLElement).querySelector('.refresh-btn')
         ).toBeNull();
     });
 
