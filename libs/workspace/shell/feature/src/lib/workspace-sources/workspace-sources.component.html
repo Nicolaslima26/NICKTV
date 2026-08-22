@@ -8,16 +8,31 @@
                 <h2 class="sources-title">{{ title() }}</h2>
                 <span class="sources-subtitle">{{ subtitle() }}</span>
             </div>
-            <button
-                type="button"
-                mat-stroked-button
-                class="sort-trigger"
-                [matMenuTriggerFor]="sortMenu"
-            >
-                <mat-icon>sort</mat-icon>
-                <span class="sort-trigger__label">{{ activeSortLabel() }}</span>
-                <mat-icon class="sort-trigger__caret">arrow_drop_down</mat-icon>
-            </button>
+            <div class="sources-header__actions">
+                <button
+                    type="button"
+                    mat-stroked-button
+                    class="sort-trigger"
+                    [matMenuTriggerFor]="sortMenu"
+                >
+                    <mat-icon>sort</mat-icon>
+                    <span class="sort-trigger__label">{{
+                        activeSortLabel()
+                    }}</span>
+                    <mat-icon class="sort-trigger__caret"
+                        >arrow_drop_down</mat-icon
+                    >
+                </button>
+                <button
+                    type="button"
+                    mat-flat-button
+                    class="add-source-button"
+                    (click)="onAddPlaylist()"
+                >
+                    <mat-icon>add</mat-icon>
+                    {{ 'HOME.URL_UPLOAD.ADD_PLAYLIST' | translate }}
+                </button>
+            </div>
             <mat-menu #sortMenu="matMenu" xPosition="before">
                 @for (option of sortOptions; track option.translationKey) {
                     <button
@@ -42,6 +57,7 @@
     >
         <app-recent-playlists
             [searchQueryInput]="searchQuery()"
+            [managementMode]="true"
             (addPlaylistClicked)="onAddPlaylist($event)"
         />
     </div>

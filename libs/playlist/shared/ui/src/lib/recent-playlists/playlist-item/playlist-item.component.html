@@ -5,128 +5,207 @@
     cdkDragPreviewContainer="parent"
     [class.selected]="isSelected()"
     [class.is-busy]="isBusy()"
+    [class.playlist-item--management]="managementMode()"
     (click)="onPlaylistClick()"
 >
     @if (isDraggable()) {
         <mat-icon cdkDragHandle class="drag-icon">drag_indicator</mat-icon>
     }
-    <div class="playlist-icon">
-        @if (item.url) {
-            <div class="icon-container">
-                <mat-icon
-                    class="upload-type-icon"
-                    [matTooltip]="
-                        ('HOME.PLAYLISTS.ADDED_VIA_URL' | translate) +
-                        ' ' +
-                        item.url
-                    "
-                    >cloud</mat-icon
-                >
-                @if (item.autoRefresh) {
+    <div class="playlist-icon" [attr.data-source-type]="sourceType">
+        @if (managementMode()) {
+            <mat-icon class="management-source-icon">{{ sourceIcon }}</mat-icon>
+        }
+        @if (!managementMode()) {
+            @if (item.url) {
+                <div class="icon-container">
                     <mat-icon
-                        class="auto-refresh-indicator"
+                        class="upload-type-icon"
                         [matTooltip]="
-                            'HOME.PLAYLISTS.AUTO_REFRESH_ENABLED' | translate
+                            ('HOME.PLAYLISTS.ADDED_VIA_URL' | translate) +
+                            ' ' +
+                            item.url
                         "
-                        >autorenew</mat-icon
+                        >cloud</mat-icon
                     >
-                }
-            </div>
-        }
-        @if (!item.url && !item.serverUrl && !item.macAddress) {
-            <div class="icon-container">
-                <mat-icon
-                    class="upload-type-icon"
-                    [matTooltip]="'HOME.PLAYLISTS.ADDED_VIA_FILE' | translate"
-                    >folder</mat-icon
-                >
-                @if (item.autoRefresh) {
+                    @if (item.autoRefresh) {
+                        <mat-icon
+                            class="auto-refresh-indicator"
+                            [matTooltip]="
+                                'HOME.PLAYLISTS.AUTO_REFRESH_ENABLED'
+                                    | translate
+                            "
+                            >autorenew</mat-icon
+                        >
+                    }
+                </div>
+            }
+            @if (!item.url && !item.serverUrl && !item.macAddress) {
+                <div class="icon-container">
                     <mat-icon
-                        class="auto-refresh-indicator"
+                        class="upload-type-icon"
                         [matTooltip]="
-                            'HOME.PLAYLISTS.AUTO_REFRESH_ENABLED' | translate
+                            'HOME.PLAYLISTS.ADDED_VIA_FILE' | translate
                         "
-                        >autorenew</mat-icon
+                        >folder</mat-icon
                     >
-                }
-            </div>
-        }
-        @if (item.serverUrl) {
-            <div class="icon-container">
+                    @if (item.autoRefresh) {
+                        <mat-icon
+                            class="auto-refresh-indicator"
+                            [matTooltip]="
+                                'HOME.PLAYLISTS.AUTO_REFRESH_ENABLED'
+                                    | translate
+                            "
+                            >autorenew</mat-icon
+                        >
+                    }
+                </div>
+            }
+            @if (item.serverUrl) {
+                <div class="icon-container">
+                    <mat-icon
+                        class="upload-type-icon"
+                        [matTooltip]="
+                            'HOME.PLAYLISTS.XTREAM_PLAYLIST' | translate
+                        "
+                        >public</mat-icon
+                    >
+                    <span
+                        class="status-dot"
+                        [class]="getStatusClass()"
+                        [matTooltip]="'Portal status: ' + portalStatus"
+                        [attr.aria-label]="'Portal status: ' + portalStatus"
+                    ></span>
+                </div>
+            }
+            @if (item.macAddress) {
                 <mat-icon
                     class="upload-type-icon"
-                    [matTooltip]="'HOME.PLAYLISTS.XTREAM_PLAYLIST' | translate"
-                    >public</mat-icon
+                    [matTooltip]="'HOME.PLAYLISTS.STALKER_PORTAL' | translate"
+                    >dashboard</mat-icon
                 >
-                <span
-                    class="status-dot"
-                    [class]="getStatusClass()"
-                    [matTooltip]="'Portal status: ' + portalStatus"
-                    [attr.aria-label]="'Portal status: ' + portalStatus"
-                ></span>
-            </div>
-        }
-        @if (item.macAddress) {
-            <mat-icon
-                class="upload-type-icon"
-                [matTooltip]="'HOME.PLAYLISTS.STALKER_PORTAL' | translate"
-                >dashboard</mat-icon
-            >
+            }
         }
     </div>
     <div class="playlist-content">
-        <div class="playlist-title">
-            {{ item.title || item.filename }}
-        </div>
-        <div class="meta">
-            @if (!item.serverUrl && !item.portalUrl) {
-                {{ 'HOME.PLAYLISTS.CHANNELS' | translate }}: {{ item.count }}
-                @if (item.importDate.length > 3) {
-                    | {{ 'HOME.PLAYLISTS.ADDED' | translate }}:
-                    {{ item.importDate | date: undefined : undefined : currentLocale() }}
-                }
-                @if (item.updateDate) {
-                    | {{ 'HOME.PLAYLISTS.UPDATED' | translate }}:
-                    {{
-                        item.updateDate
-                            | date
-                                : 'MMMM d, yyyy, HH:mm'
-                                : undefined
-                                : currentLocale()
-                    }}
-                }
-                @if (item.updateState === 2) {
-                    <mat-icon
-                        [matTooltip]="
-                            'HOME.PLAYLISTS.INFO_DIALOG.UPDATE_FAILED'
-                                | translate
-                        "
-                        [inline]="true"
-                        >warning</mat-icon
-                    >
-                }
-            } @else {
-                @if (item.macAddress) {
-                    Stalker
-                } @else {
-                    Xtream
-                }
-                @if (item.importDate.length > 3) {
-                    | {{ 'HOME.PLAYLISTS.ADDED' | translate }}:
-                    {{ item.importDate | date: undefined : undefined : currentLocale() }}
-                }
-                @if (item.updateDate) {
-                    | {{ 'HOME.PLAYLISTS.UPDATED' | translate }}:
-                    {{
-                        item.updateDate
-                            | date
-                                : 'MMMM d, yyyy, HH:mm'
-                                : undefined
-                                : currentLocale()
-                    }}
-                }
+        <div class="playlist-heading">
+            <div class="playlist-title">
+                {{ item.title || item.filename }}
+            </div>
+            @if (managementMode()) {
+                <span class="source-type">
+                    @if (item.serverUrl) {
+                        <span
+                            class="status-dot status-dot--inline"
+                            [class]="getStatusClass()"
+                            [attr.aria-label]="'Portal status: ' + portalStatus"
+                        ></span>
+                    }
+                    {{ sourceType }}
+                </span>
             }
         </div>
+        @if (managementMode()) {
+            <div class="management-meta">
+                <span class="management-meta__item">
+                    <mat-icon>live_tv</mat-icon>
+                    {{ item.count || 0 }}
+                    {{ 'HOME.PLAYLISTS.CHANNELS' | translate }}
+                </span>
+                @if (item.updateDate) {
+                    <span class="management-meta__item">
+                        <mat-icon>update</mat-icon>
+                        {{ 'HOME.PLAYLISTS.UPDATED' | translate }}
+                        {{
+                            item.updateDate
+                                | date
+                                    : 'mediumDate'
+                                    : undefined
+                                    : currentLocale()
+                        }}
+                    </span>
+                } @else if (item.importDate.length > 3) {
+                    <span class="management-meta__item">
+                        <mat-icon>calendar_today</mat-icon>
+                        {{ 'HOME.PLAYLISTS.ADDED' | translate }}
+                        {{
+                            item.importDate
+                                | date
+                                    : 'mediumDate'
+                                    : undefined
+                                    : currentLocale()
+                        }}
+                    </span>
+                }
+                @if (item.updateState === 2) {
+                    <span
+                        class="management-meta__item management-meta__item--error"
+                    >
+                        <mat-icon>warning</mat-icon>
+                        {{
+                            'HOME.PLAYLISTS.INFO_DIALOG.UPDATE_FAILED'
+                                | translate
+                        }}
+                    </span>
+                }
+            </div>
+        } @else {
+            <div class="meta">
+                @if (!item.serverUrl && !item.portalUrl) {
+                    {{ 'HOME.PLAYLISTS.CHANNELS' | translate }}:
+                    {{ item.count }}
+                    @if (item.importDate.length > 3) {
+                        | {{ 'HOME.PLAYLISTS.ADDED' | translate }}:
+                        {{
+                            item.importDate
+                                | date: undefined : undefined : currentLocale()
+                        }}
+                    }
+                    @if (item.updateDate) {
+                        | {{ 'HOME.PLAYLISTS.UPDATED' | translate }}:
+                        {{
+                            item.updateDate
+                                | date
+                                    : 'MMMM d, yyyy, HH:mm'
+                                    : undefined
+                                    : currentLocale()
+                        }}
+                    }
+                    @if (item.updateState === 2) {
+                        <mat-icon
+                            [matTooltip]="
+                                'HOME.PLAYLISTS.INFO_DIALOG.UPDATE_FAILED'
+                                    | translate
+                            "
+                            [inline]="true"
+                            >warning</mat-icon
+                        >
+                    }
+                } @else {
+                    @if (item.macAddress) {
+                        Stalker
+                    } @else {
+                        Xtream
+                    }
+                    @if (item.importDate.length > 3) {
+                        | {{ 'HOME.PLAYLISTS.ADDED' | translate }}:
+                        {{
+                            item.importDate
+                                | date: undefined : undefined : currentLocale()
+                        }}
+                    }
+                    @if (item.updateDate) {
+                        | {{ 'HOME.PLAYLISTS.UPDATED' | translate }}:
+                        {{
+                            item.updateDate
+                                | date
+                                    : 'MMMM d, yyyy, HH:mm'
+                                    : undefined
+                                    : currentLocale()
+                        }}
+                    }
+                }
+            </div>
+        }
         @if (isBusy() && busyMessage()) {
             <div class="busy-state">
                 <span class="busy-state__message">{{ busyMessage() }}</span>

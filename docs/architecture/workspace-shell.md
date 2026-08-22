@@ -140,6 +140,13 @@ The context panel is part of the shell contract. New workspace-level routes
 should explicitly decide whether they need one rather than adding local
 sidebars inside feature pages.
 
+The `/workspace/sources` page renders the shared recent-playlists surface in
+management mode. In this mode, each source is a dark, responsive card with its
+provider type, stored content count, last import/update date, real Xtream
+portal status, and the existing edit, refresh, cancel, and confirmed-remove
+actions. The persistent page-header action opens the shared add-playlist flow.
+Connection details and credentials must never be rendered in these cards.
+
 Xtream and Stalker category panels preserve provider/server category order by
 default. The panel header exposes a sort menu next to category search with
 `Server sorting`, `A-Z`, and `Z-A`; when alphabetical sorting is active,
