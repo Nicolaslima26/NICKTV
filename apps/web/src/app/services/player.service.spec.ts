@@ -110,7 +110,7 @@ describe('PlayerService', () => {
             {
                 streamUrl: 'https://example.com/live.m3u8',
                 title: 'Example Live',
-                userAgent: 'IPTVnator Test',
+                userAgent: 'ONIXPLUS Test',
                 referer: 'https://referrer.example.com',
                 origin: 'https://origin.example.com',
             },
@@ -122,7 +122,7 @@ describe('PlayerService', () => {
             expect.objectContaining({
                 url: 'https://example.com/live.m3u8',
                 title: 'Example Live',
-                'user-agent': 'IPTVnator Test',
+                'user-agent': 'ONIXPLUS Test',
                 referer: 'https://referrer.example.com',
                 origin: 'https://origin.example.com',
             })

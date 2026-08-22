@@ -62,7 +62,7 @@ describe('worker-runtime-paths', () => {
     });
 
     it('prefers process.resourcesPath for packaged worker resolution', () => {
-        const resourcesPath = '/Applications/IPTVnator.app/Contents/Resources';
+        const resourcesPath = '/Applications/ONIXPLUS.app/Contents/Resources';
         const resourcesWorkerPath = packagedWorkerPath(
             resourcesPath,
             'epg-parser.worker.js'
@@ -73,7 +73,7 @@ describe('worker-runtime-paths', () => {
             developmentWorkerDir: '/unused',
             resourcesPath,
             appPath:
-                '/Applications/IPTVnator.app/Contents/Resources/app.asar',
+                '/Applications/ONIXPLUS.app/Contents/Resources/app.asar',
             fileExists: (filePath) => filePath === resourcesWorkerPath,
         });
 
@@ -85,7 +85,7 @@ describe('worker-runtime-paths', () => {
 
     it('falls back to appPath dirname when the resourcesPath candidate is missing', () => {
         const appWorkerPath = packagedWorkerPath(
-            '/opt/IPTVnator/resources',
+            '/opt/ONIXPLUS/resources',
             'database.worker.js'
         );
         const bootstrap = resolveWorkerRuntimeBootstrap({
@@ -93,7 +93,7 @@ describe('worker-runtime-paths', () => {
             workerFilename: 'database.worker.js',
             developmentWorkerDir: '/unused',
             resourcesPath: '/tmp/runtime-resources',
-            appPath: '/opt/IPTVnator/resources/app.asar',
+            appPath: '/opt/ONIXPLUS/resources/app.asar',
             fileExists: (filePath) => filePath === appWorkerPath,
         });
 
@@ -111,7 +111,7 @@ describe('worker-runtime-paths', () => {
                 workerFilename: 'database.worker.js',
                 developmentWorkerDir: '/unused',
                 resourcesPath: '/resources',
-                appPath: '/opt/IPTVnator/resources/app.asar',
+                appPath: '/opt/ONIXPLUS/resources/app.asar',
                 fileExists: () => false,
             })
         ).toThrow(
@@ -120,7 +120,7 @@ describe('worker-runtime-paths', () => {
                 'Tried:',
                 `- ${packagedWorkerPath('/resources', 'database.worker.js')}`,
                 `- ${packagedWorkerPath(
-                    '/opt/IPTVnator/resources',
+                    '/opt/ONIXPLUS/resources',
                     'database.worker.js'
                 )}`,
             ].join('\n')

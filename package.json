@@ -1,15 +1,22 @@
 {
-    "name": "iptvnator",
+    "name": "onixplus",
     "version": "0.23.0",
     "engines": {
         "node": "^22.13.0 || >=24.0.0"
     },
     "license": "MIT",
-    "description": "IPTV player application.",
-    "homepage": "https://github.com/4gray/iptvnator",
+    "description": "ONIXPLUS player for user-supplied M3U, Xtream Codes, and Stalker sources.",
+    "homepage": "https://github.com/Nicolaslima26/NICKTV",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Nicolaslima26/NICKTV.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Nicolaslima26/NICKTV/issues"
+    },
     "author": {
-        "name": "4gray",
-        "email": "fourgray@proton.me"
+        "name": "Nicolaslima26",
+        "url": "https://github.com/Nicolaslima26"
     },
     "keywords": [
         "angular",

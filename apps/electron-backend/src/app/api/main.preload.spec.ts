@@ -177,7 +177,7 @@ describe('main preload DB IPC contract', () => {
             currentVersion: '0.22.0',
             latestVersion: '0.23.0',
             manualDownloadUrl:
-                'https://github.com/4gray/iptvnator/releases/latest',
+                'https://github.com/Nicolaslima26/NICKTV/releases/latest',
             status: 'available',
             supportedSelfUpdate: true,
         };

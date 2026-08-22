@@ -128,7 +128,7 @@ describe('embedded-mpv-frame-copy-platform.util', () => {
             chmodSync(helperPath(), 0o755);
             writeFileSync(readerPath(), 'reader');
             mockElectronApp.isPackaged = true;
-            const resourcesPath = path.join(tempDir, 'IPTVnator', 'Resources');
+            const resourcesPath = path.join(tempDir, 'ONIXPLUS', 'Resources');
             Object.defineProperty(process, 'resourcesPath', {
                 configurable: true,
                 value: resourcesPath,
@@ -162,7 +162,7 @@ describe('embedded-mpv-frame-copy-platform.util', () => {
 
         it('limits packaged native-view addon discovery to package-owned paths', () => {
             mockElectronApp.isPackaged = true;
-            const resourcesPath = path.join(tempDir, 'IPTVnator', 'Resources');
+            const resourcesPath = path.join(tempDir, 'ONIXPLUS', 'Resources');
             Object.defineProperty(process, 'resourcesPath', {
                 configurable: true,
                 value: resourcesPath,

@@ -427,15 +427,17 @@ reachable by touch needs its restore affordance to be reachable too.
 
 ### Light Theme
 
-- Flat beats glossy
-- White and app-owned widget/content surface layers should separate content
-- Selection should read as a blue outline plus soft tint, not a solid slab
+- Flat beats glossy.
+- Use the pearl and light derived surfaces from the ONIXPLUS token set.
+- Selection should use Violeta Real (`#601FE8`) with readable contrast.
 
 ### Dark Theme
 
-- Slight translucency is acceptable
-- Background layers can be deeper and more cinematic
-- Keep contrast readable without going pure white everywhere
+- Use Preto Onix (`#07080D`) for the main shell and Roxo Profundo (`#210C5F`) for elevated surfaces.
+- Roxo Luminoso (`#9E5EF6`) and Lavanda Neon (`#C696F5`) are accents, not body-text colors.
+- Keep text contrast readable with Branco Pérola (`#E4E3E5`) and Cinza Metálico (`#A2A1A4`).
+
+Both themes must consume the centralized `--app-*` tokens from `apps/web/src/m3-theme.scss`; do not introduce one-off purple values in component styles.
 
 ## Reuse Strategy
 

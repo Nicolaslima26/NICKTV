@@ -17,7 +17,7 @@ const githubReleases = [
     {
         body: '## New\n\nFresh build',
         draft: false,
-        html_url: 'https://github.com/4gray/iptvnator/releases/tag/v0.24.0',
+        html_url: 'https://github.com/Nicolaslima26/NICKTV/releases/tag/v0.24.0',
         name: 'v0.24.0',
         prerelease: false,
         published_at: '2026-06-29T00:00:00.000Z',
@@ -26,7 +26,7 @@ const githubReleases = [
     {
         body: '## Current\n\nUpdate details',
         draft: false,
-        html_url: 'https://github.com/4gray/iptvnator/releases/tag/v0.23.0',
+        html_url: 'https://github.com/Nicolaslima26/NICKTV/releases/tag/v0.23.0',
         name: 'v0.23.0',
         prerelease: false,
         published_at: '2026-06-28T00:00:00.000Z',
@@ -36,7 +36,7 @@ const githubReleases = [
         body: 'beta notes',
         draft: false,
         html_url:
-            'https://github.com/4gray/iptvnator/releases/tag/v0.22.5-beta',
+            'https://github.com/Nicolaslima26/NICKTV/releases/tag/v0.22.5-beta',
         name: 'v0.22.5-beta',
         prerelease: true,
         published_at: '2026-06-27T00:00:00.000Z',
@@ -45,7 +45,7 @@ const githubReleases = [
     {
         body: '## Older\n\nBug fixes',
         draft: false,
-        html_url: 'https://github.com/4gray/iptvnator/releases/tag/v0.22.0',
+        html_url: 'https://github.com/Nicolaslima26/NICKTV/releases/tag/v0.22.0',
         name: 'v0.22.0',
         prerelease: false,
         published_at: '2026-06-20T00:00:00.000Z',
@@ -112,7 +112,7 @@ describe('AppUpdateService', () => {
         expect(service.getStatus()).toEqual({
             currentVersion: '0.22.0',
             manualDownloadUrl:
-                'https://github.com/4gray/iptvnator/releases/latest',
+                'https://github.com/Nicolaslima26/NICKTV/releases/latest',
             status: ELECTRON_BRIDGE_APP_UPDATE_STATUSES.Unsupported,
             supportedSelfUpdate: false,
         });
@@ -133,7 +133,7 @@ describe('AppUpdateService', () => {
         expect(service.getStatus()).toEqual({
             currentVersion: '0.0',
             manualDownloadUrl:
-                'https://github.com/4gray/iptvnator/releases/latest',
+                'https://github.com/Nicolaslima26/NICKTV/releases/latest',
             status: ELECTRON_BRIDGE_APP_UPDATE_STATUSES.Unsupported,
             supportedSelfUpdate: false,
         });
@@ -157,7 +157,7 @@ describe('AppUpdateService', () => {
         expect(service.getStatus()).toEqual({
             currentVersion: '0.22.0',
             manualDownloadUrl:
-                'https://github.com/4gray/iptvnator/releases/latest',
+                'https://github.com/Nicolaslima26/NICKTV/releases/latest',
             status: ELECTRON_BRIDGE_APP_UPDATE_STATUSES.Unsupported,
             supportedSelfUpdate: false,
         });
@@ -182,7 +182,7 @@ describe('AppUpdateService', () => {
 
         expect(updaterFactory).not.toHaveBeenCalled();
         expect(fetcher).toHaveBeenCalledWith(
-            'https://api.github.com/repos/4gray/iptvnator/releases?per_page=10&page=1',
+            'https://api.github.com/repos/Nicolaslima26/NICKTV/releases?per_page=10&page=1',
             expect.any(Object)
         );
         expect(service.getStatus()).toEqual(
@@ -201,7 +201,7 @@ describe('AppUpdateService', () => {
         }).service.getStatus();
         const appImage = createService({
             platform: 'linux',
-            env: { APPIMAGE: '/Applications/IPTVnator.AppImage' },
+            env: { APPIMAGE: '/Applications/ONIXPLUS.AppImage' },
         }).service.getStatus();
 
         expect(unsupported.supportedSelfUpdate).toBe(false);
@@ -265,11 +265,11 @@ describe('AppUpdateService', () => {
 
         expect(updater.checkForUpdates).not.toHaveBeenCalled();
         expect(fetcher).toHaveBeenCalledWith(
-            'https://api.github.com/repos/4gray/iptvnator/releases?per_page=10&page=1',
+            'https://api.github.com/repos/Nicolaslima26/NICKTV/releases?per_page=10&page=1',
             expect.objectContaining({
                 headers: expect.objectContaining({
                     Accept: 'application/vnd.github+json',
-                    'User-Agent': 'iptvnator/0.22.0',
+                            'User-Agent': 'onixplus/0.22.0',
                 }),
             })
         );

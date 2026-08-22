@@ -15,18 +15,15 @@ $my-typography: mat.m2-define-typography-config(
 @include mat.typography-hierarchy($my-typography);
 
 // ─── M3 Themes ───────────────────────────────────────────────────────────────
-// One primary color across the app. Azure is the closest M3 prebuilt to the
-// product's "active/selection" blue (#2f7bff / #78adff), so checkboxes, radio
-// buttons, raised CTAs, etc. now read as the same blue as rail selection.
-//
-// Cyan stays on tertiary so the EPG "now" indicator (which uses Material
-// tertiary surfaces) keeps its existing visual role.
+// ONIXPLUS uses Material's violet family for Material-owned controls. Exact
+// brand colors remain app-owned tokens below so product surfaces do not depend
+// on Material's generated palette steps.
 $light-theme: mat.define-theme(
     (
         color: (
             theme-type: light,
-            primary: mat.$azure-palette,
-            tertiary: mat.$cyan-palette,
+            primary: mat.$violet-palette,
+            tertiary: mat.$magenta-palette,
         ),
         typography: (
             plain-family: $app-font-stack,
@@ -39,8 +36,8 @@ $dark-theme: mat.define-theme(
     (
         color: (
             theme-type: dark,
-            primary: mat.$azure-palette,
-            tertiary: mat.$cyan-palette,
+            primary: mat.$violet-palette,
+            tertiary: mat.$magenta-palette,
         ),
         typography: (
             plain-family: $app-font-stack,
@@ -54,17 +51,17 @@ html {
     @include mat.all-component-themes($light-theme);
 
     // ── Light theme design tokens ─────────────────────────────────────────
-    --app-shell-bg: #eef0f3;
-    --app-rail-bg: #eef0f3;
-    --app-header-bg: #eef0f3;
-    --app-content-bg: #f5f6f8;
+    --app-shell-bg: #e4e3e5;
+    --app-rail-bg: #e4e3e5;
+    --app-header-bg: #e4e3e5;
+    --app-content-bg: #f7f5fa;
     --app-rail-border: transparent;
-    --app-on-surface: #1d1b1e;
+    --app-on-surface: #07080d;
     --app-hover-overlay: rgba(0, 0, 0, 0.06);
     --app-search-bg: rgba(255, 255, 255, 0.7);
     --app-search-border: rgba(0, 0, 0, 0.1);
-    --app-selection-color: #2f7bff;
-    --app-selection-on-color: #eef4ff;
+    --app-selection-color: #601fe8;
+    --app-selection-on-color: #e4e3e5;
     --app-selection-surface: color-mix(
         in srgb,
         var(--app-selection-color) 14%,
@@ -98,19 +95,19 @@ html {
     --app-widget-border: transparent;
     --app-widget-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
     --app-widget-header-border: rgba(0, 0, 0, 0.06);
-    --app-card-hover-bg: #f0f2f5;
+    --app-card-hover-bg: #eee9f8;
     --app-separator: rgba(0, 0, 0, 0.14);
 
     // Typography — subdued, not pure black
-    --app-heading-color: #1a1d23;
-    --app-body-color: #4a5060;
-    --app-muted-color: #8891a4;
-    --app-eyebrow-color: #7c8495;
+    --app-heading-color: #07080d;
+    --app-body-color: #616062;
+    --app-muted-color: #a2a1a4;
+    --app-eyebrow-color: #616062;
 
     // Provider accent colors
-    --app-provider-xtream: #2f7bff;
-    --app-provider-stalker: #10b981;
-    --app-provider-m3u: #d97706;
+    --app-provider-xtream: #601fe8;
+    --app-provider-stalker: #9e5ef6;
+    --app-provider-m3u: #210c5f;
 
     // Subscription-expiry chips (dashboard source cards). Text/surface pairs
     // are picked per theme to keep >= 4.5:1 small-text contrast against the
@@ -123,31 +120,30 @@ html {
     // Hero
     --app-accent-gradient: linear-gradient(
         135deg,
-        rgba(47, 123, 255, 0.08) 0%,
-        rgba(92, 214, 255, 0.05) 100%
+        rgba(96, 31, 232, 0.12) 0%,
+        rgba(158, 94, 246, 0.08) 100%
     );
-    --app-hero-surface: rgba(47, 123, 255, 0.04);
+    --app-hero-surface: rgba(96, 31, 232, 0.06);
 
     .dark-theme {
         @include mat.all-component-colors($dark-theme);
 
-        // ── Dark graphite theme ────────────────────────────────────────────
-        // Inspired by both Slack (sidebar distinction) and GitButler (data density)
-        // Key principle: clearly distinct surface layers using graphite steps
-        // Darkest → lightest: #0d0f12 → #141720 → #1c2030 → #222840
+        // ── ONIXPLUS dark theme ────────────────────────────────────────────
+        // Preto Onix anchors the shell; Roxo Profundo separates cards and
+        // secondary surfaces without flattening the application hierarchy.
 
         // App shell & navigation
-        --app-shell-bg: #0d0f12;
-        --app-rail-bg: #111318;
-        --app-header-bg: #111318;
-        --app-content-bg: #161a22;
+        --app-shell-bg: #07080d;
+        --app-rail-bg: #0d071e;
+        --app-header-bg: #0d071e;
+        --app-content-bg: #100922;
         --app-rail-border: transparent;
-        --app-on-surface: #e6e1e5;
+        --app-on-surface: #e4e3e5;
         --app-hover-overlay: rgba(255, 255, 255, 0.08);
         --app-search-bg: rgba(255, 255, 255, 0.05);
         --app-search-border: rgba(255, 255, 255, 0.09);
-        --app-selection-color: #78adff;
-        --app-selection-on-color: #071225;
+        --app-selection-color: #9e5ef6;
+        --app-selection-on-color: #07080d;
         --app-selection-surface: color-mix(
             in srgb,
             var(--app-selection-color) 18%,
@@ -176,25 +172,25 @@ html {
         --app-content-shadow: -4px 8px 20px rgba(0, 0, 0, 0.18);
 
         // Widget surfaces — NO border, surface contrast does the work
-        // Widgets sit on content-bg (#161a22), so widget-bg is notably lighter
-        --app-widget-bg: #1e2330;
-        --app-widget-header-bg: #232840;
+        // Widgets sit above the near-black content layer.
+        --app-widget-bg: #210c5f;
+        --app-widget-header-bg: #291070;
         --app-widget-border: transparent;
         --app-widget-shadow: none;
         --app-widget-header-border: rgba(255, 255, 255, 0.05);
-        --app-card-hover-bg: #252b3a;
+        --app-card-hover-bg: #32118a;
         --app-separator: rgba(255, 255, 255, 0.14);
 
         // Typography — NOT pure white. Warm graphite-tinted whites
-        --app-heading-color: #d8dce8;       // soft off-white, not #fff
-        --app-body-color: #8b93a8;          // muted blue-grey
-        --app-muted-color: #5c6478;         // dimmed
-        --app-eyebrow-color: #6b7494;       // eyebrow labels
+        --app-heading-color: #e4e3e5;
+        --app-body-color: #a2a1a4;
+        --app-muted-color: #616062;
+        --app-eyebrow-color: #c696f5;
 
         // Provider accents (slightly brighter for dark bg)
-        --app-provider-xtream: #78adff;
-        --app-provider-stalker: #34d399;
-        --app-provider-m3u: #fbbf24;
+        --app-provider-xtream: #9e5ef6;
+        --app-provider-stalker: #c696f5;
+        --app-provider-m3u: #601fe8;
 
         // Subscription-expiry chips — brighter text for the dark surfaces;
         // expired matches the --app-live-color accent family.
@@ -210,10 +206,10 @@ html {
         // Hero section
         --app-accent-gradient: linear-gradient(
             135deg,
-            rgba(120, 173, 255, 0.12) 0%,
-            rgba(92, 214, 255, 0.07) 100%
+            rgba(96, 31, 232, 0.2) 0%,
+            rgba(198, 150, 245, 0.1) 100%
         );
-        --app-hero-surface: rgba(30, 35, 48, 0.9);
+        --app-hero-surface: rgba(33, 12, 95, 0.72);
     }
 }
 

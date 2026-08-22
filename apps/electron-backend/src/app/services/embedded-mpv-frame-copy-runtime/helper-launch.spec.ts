@@ -19,7 +19,7 @@ describe('createLinuxFrameCopyHelperLaunch', () => {
         ['system', '/opt/iptvnator/native/iptvnator_mpv_helper'],
         [
             'bundled',
-            '/tmp/.mount-IPTVnator/resources/app.asar.unpacked/electron-backend/native/iptvnator_mpv_helper',
+            '/tmp/.mount-ONIXPLUS/resources/app.asar.unpacked/electron-backend/native/iptvnator_mpv_helper',
         ],
     ] as const)(
         'launches a non-Snap %s helper directly',

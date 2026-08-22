@@ -630,7 +630,7 @@ describe('external player shutdown on app quit', () => {
         const opening = openMpvPlayer({
             title: 'Second stream',
             url: 'https://example.com/two.m3u8',
-            userAgent: 'IPTVnator test agent',
+            userAgent: 'ONIXPLUS test agent',
         });
         while (sockets.length < 1) await Promise.resolve();
         const replacementId =

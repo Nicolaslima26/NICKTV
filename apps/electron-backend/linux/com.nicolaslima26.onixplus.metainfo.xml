@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.nicolaslima26.onixplus</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>ONIXPLUS</name>
+  <developer_name>Nicolaslima26</developer_name>
+  <summary>IPTV player for user-supplied M3U, Xtream Codes, and Stalker sources</summary>
+  <launchable type="desktop-id">com.nicolaslima26.onixplus.desktop</launchable>
+
+  <description>
+    <p>ONIXPLUS is a cross-platform IPTV player for playlists and portal connections supplied by the user.</p>
+    <p>It supports M3U and M3U8 playlists, Xtream Codes API, and Stalker portals with EPG, catch-up, favorites, and external player integration.</p>
+    <p>The app does not include channels, playlists, or media catalogs. IPTV sources, logos, metadata, and programme information come from services the user configures.</p>
+  </description>
+
+  <categories>
+    <category>AudioVideo</category>
+    <category>Player</category>
+    <category>Video</category>
+  </categories>
+
+  <keywords>
+    <keyword>IPTV</keyword>
+    <keyword>M3U</keyword>
+    <keyword>M3U8</keyword>
+    <keyword>EPG</keyword>
+    <keyword>Xtream</keyword>
+    <keyword>Stalker</keyword>
+  </keywords>
+
+  <url type="homepage">https://github.com/Nicolaslima26/NICKTV</url>
+  <url type="bugtracker">https://github.com/Nicolaslima26/NICKTV/issues</url>
+
+  <content_rating type="oars-1.0"/>
+
+  <provides>
+    <binary>onixplus</binary>
+  </provides>
+</component>

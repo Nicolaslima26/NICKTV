@@ -25,7 +25,7 @@ interface TestResponse {
     statusCode: number | undefined;
 }
 
-const INDEX_BODY = Buffer.from('<main>IPTVnator remote control</main>');
+const INDEX_BODY = Buffer.from('<main>ONIXPLUS remote control</main>');
 const ASSETS = {
     '/app.js': {
         body: Buffer.from('globalThis.remoteControlLoaded = true;'),

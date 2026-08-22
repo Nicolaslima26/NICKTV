@@ -20,7 +20,7 @@ async function setup(options: SetupOptions = {}) {
                   requestHeaders: JSON.stringify({
                       Authorization: 'not-allowed',
                       Referer: 'https://example.test/',
-                      'User-Agent': 'IPTVnator',
+                      'User-Agent': 'ONIXPLUS',
                   }),
                   status: 'completed',
                   url: 'https://example.test/movie.mp4',
@@ -115,7 +115,7 @@ describe('redownload missing completed file', () => {
             filePath: '/downloads/movie.mp4',
             headers: {
                 Referer: 'https://example.test/',
-                'User-Agent': 'IPTVnator',
+                'User-Agent': 'ONIXPLUS',
             },
             id: 42,
             resumeValidator: null,
