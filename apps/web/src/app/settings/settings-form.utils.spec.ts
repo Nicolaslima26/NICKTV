@@ -1,5 +1,5 @@
 import { FormBuilder } from '@angular/forms';
-import { Settings } from '@iptvnator/shared/interfaces';
+import { Settings, Theme } from '@iptvnator/shared/interfaces';
 import {
     createSettingsForm,
     createSettingsFromFormValue,
@@ -32,5 +32,15 @@ describe('settings form utils — strip country prefix', () => {
         const settings = createSettingsFromFormValue(form, {} as Settings);
 
         expect(settings.stripCountryPrefix).toBe(false);
+    });
+});
+
+describe('settings form utils — ONIXPLUS theme', () => {
+    const formBuilder = new FormBuilder();
+
+    it('uses dark as the default theme for new settings', () => {
+        const form = createSettingsForm(formBuilder, true);
+
+        expect(form.getRawValue().theme).toBe(Theme.DarkTheme);
     });
 });

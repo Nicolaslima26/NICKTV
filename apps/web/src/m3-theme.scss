@@ -129,39 +129,40 @@ html {
         @include mat.all-component-colors($dark-theme);
 
         // ── ONIXPLUS dark theme ────────────────────────────────────────────
-        // Preto Onix anchors the shell; Roxo Profundo separates cards and
-        // secondary surfaces without flattening the application hierarchy.
+        // Preto Onix and neutral graphite own the application surfaces.
+        // Violet is deliberately reserved for interaction feedback: actions,
+        // focus, selection, progress and hover accents.
 
         // App shell & navigation
         --app-shell-bg: #07080d;
-        --app-rail-bg: #0d071e;
-        --app-header-bg: #0d071e;
-        --app-content-bg: #100922;
-        --app-rail-border: transparent;
+        --app-rail-bg: #0a0a10;
+        --app-header-bg: #0a0a10;
+        --app-content-bg: #0c0c12;
+        --app-rail-border: rgba(255, 255, 255, 0.05);
         --app-on-surface: #e4e3e5;
-        --app-hover-overlay: rgba(255, 255, 255, 0.08);
-        --app-search-bg: rgba(255, 255, 255, 0.05);
-        --app-search-border: rgba(255, 255, 255, 0.09);
+        --app-hover-overlay: rgba(158, 94, 246, 0.09);
+        --app-search-bg: rgba(255, 255, 255, 0.035);
+        --app-search-border: rgba(255, 255, 255, 0.08);
         --app-selection-color: #9e5ef6;
         --app-selection-on-color: #07080d;
         --app-selection-surface: color-mix(
             in srgb,
-            var(--app-selection-color) 18%,
+            var(--app-selection-color) 10%,
             transparent
         );
         --app-selection-surface-strong: color-mix(
             in srgb,
-            var(--app-selection-color) 28%,
+            var(--app-selection-color) 16%,
             transparent
         );
         --app-selection-border: color-mix(
             in srgb,
-            var(--app-selection-color) 62%,
+            var(--app-selection-color) 55%,
             transparent
         );
         --app-selection-glow: color-mix(
             in srgb,
-            var(--app-selection-color) 44%,
+            var(--app-selection-color) 24%,
             transparent
         );
 
@@ -171,21 +172,20 @@ html {
         // Content area
         --app-content-shadow: -4px 8px 20px rgba(0, 0, 0, 0.18);
 
-        // Widget surfaces — NO border, surface contrast does the work
-        // Widgets sit above the near-black content layer.
-        --app-widget-bg: #210c5f;
-        --app-widget-header-bg: #291070;
-        --app-widget-border: transparent;
-        --app-widget-shadow: none;
-        --app-widget-header-border: rgba(255, 255, 255, 0.05);
-        --app-card-hover-bg: #32118a;
-        --app-separator: rgba(255, 255, 255, 0.14);
+        // Neutral layered surfaces keep the catalog quiet until interaction.
+        --app-widget-bg: #121218;
+        --app-widget-header-bg: #17151d;
+        --app-widget-border: rgba(255, 255, 255, 0.05);
+        --app-widget-shadow: 0 14px 36px -28px rgba(0, 0, 0, 0.92);
+        --app-widget-header-border: rgba(255, 255, 255, 0.07);
+        --app-card-hover-bg: #1a1523;
+        --app-separator: rgba(255, 255, 255, 0.1);
 
         // Typography — NOT pure white. Warm graphite-tinted whites
         --app-heading-color: #e4e3e5;
         --app-body-color: #a2a1a4;
-        --app-muted-color: #616062;
-        --app-eyebrow-color: #c696f5;
+        --app-muted-color: #8b8990;
+        --app-eyebrow-color: #a2a1a4;
 
         // Provider accents (slightly brighter for dark bg)
         --app-provider-xtream: #9e5ef6;
@@ -206,10 +206,10 @@ html {
         // Hero section
         --app-accent-gradient: linear-gradient(
             135deg,
-            rgba(96, 31, 232, 0.2) 0%,
-            rgba(198, 150, 245, 0.1) 100%
+            rgba(96, 31, 232, 0.1) 0%,
+            rgba(158, 94, 246, 0.045) 100%
         );
-        --app-hero-surface: rgba(33, 12, 95, 0.72);
+        --app-hero-surface: rgba(12, 12, 18, 0.82);
     }
 }
 

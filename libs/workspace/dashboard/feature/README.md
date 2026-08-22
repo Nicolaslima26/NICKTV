@@ -13,7 +13,9 @@ rails also require the underlying data slice to have at least one item.
 - `hero` shows the large top banner for the most recent global item. When that
   item is a live TV channel, the hero looks up the current XMLTV programme and
   displays the programme title, time range, and EPG progress bar when data is
-  available.
+  available. With an active library, the banner uses the ONIXPLUS cinematic
+  treatment: neutral near-black surfaces, provider artwork and violet reserved
+  for actions and interaction feedback.
 - `continueWatching` shows recent movies and series from
   `DashboardDataService.globalRecentVodItems()` using cover cards with playback
   progress when a saved resume position is available.

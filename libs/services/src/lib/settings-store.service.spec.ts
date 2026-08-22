@@ -117,6 +117,14 @@ describe('SettingsStore dashboard rail settings', () => {
         );
     });
 
+    it('defaults new installations to the ONIXPLUS dark theme', async () => {
+        const store = injector.get(SettingsStore);
+
+        await store.loadSettings();
+
+        expect(store.getSettings().theme).toBe(Theme.DarkTheme);
+    });
+
     it('defaults shared web controls to false when the stored field is missing', async () => {
         storedSettings = {};
         const store = injector.get(SettingsStore);

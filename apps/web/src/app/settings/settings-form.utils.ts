@@ -62,7 +62,7 @@ export function createSettingsForm(
         startupBehavior: StartupBehavior.FirstView,
         showExternalPlaybackBar: true,
         stripCountryPrefix: false,
-        theme: Theme.SystemTheme,
+        theme: Theme.DarkTheme,
         mpvPlayerPath: '',
         mpvPlayerArguments: '',
         mpvReuseInstance: false,
@@ -136,7 +136,7 @@ export function createSettingsFromFormValue(
         startupBehavior: value.startupBehavior ?? StartupBehavior.FirstView,
         showExternalPlaybackBar: value.showExternalPlaybackBar ?? true,
         stripCountryPrefix: value.stripCountryPrefix ?? false,
-        theme: value.theme ?? Theme.SystemTheme,
+        theme: value.theme ?? Theme.DarkTheme,
         mpvPlayerPath: normalizeExternalPlayerPath(value.mpvPlayerPath),
         mpvPlayerArguments: normalizeExternalPlayerArguments(
             value.mpvPlayerArguments
