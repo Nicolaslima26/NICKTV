@@ -181,7 +181,7 @@ export class SettingsFormFacade {
         this.form.markAsPristine();
         this.translate.use(this.form.value.language ?? Language.ENGLISH);
         this.settingsService.changeTheme(
-            this.form.value.theme ?? Theme.SystemTheme
+            this.form.value.theme ?? Theme.DarkTheme
         );
     }
 

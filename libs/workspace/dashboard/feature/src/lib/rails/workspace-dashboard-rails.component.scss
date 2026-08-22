@@ -18,7 +18,7 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 36px;
     min-width: 0;
 }
 
@@ -33,25 +33,26 @@
 }
 
 // ── Hero ────────────────────────────────────────────────────────────────────
-// Netflix/Apple TV-style hero: blurred poster backdrop + vignette + sharp 2:3
-// poster card + text block. Mirrors content-hero fallback (no dedicated
-// backdrop asset available, so we reuse the poster blurred + scaled).
+// Cinematic streaming hero for an active library. The sharp poster preserves
+// useful art when a provider has no backdrop; the surrounding image and dark
+// vignette make the panel read as one wide catalog feature.
 .hero {
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, var(--hero-poster-width)) minmax(0, 1fr);
-    gap: 20px;
-    padding: 16px;
+    gap: clamp(24px, 3vw, 42px);
+    min-height: 360px;
+    padding: clamp(24px, 3vw, 44px);
     text-decoration: none;
     color: inherit;
-    border-radius: 18px;
+    border-radius: 22px;
     overflow: hidden;
     isolation: isolate;
-    background: var(--app-widget-header-bg, #232840);
+    background: var(--app-hero-surface, var(--app-widget-header-bg, #17151d));
     border: 1px solid var(--app-widget-header-border, rgba(255, 255, 255, 0.08));
     box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.2),
-        0 12px 32px -18px var(--app-selection-glow, rgba(120, 173, 255, 0.4));
+        0 1px 2px rgba(0, 0, 0, 0.42),
+        0 28px 64px -42px rgba(0, 0, 0, 0.95);
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
@@ -59,12 +60,12 @@
     // Tighter than v0.21 (was 160px). Matches the v0.22 mockup's 150px
     // poster intent, freeing space for the progress + remaining label
     // without growing total hero height.
-    --hero-poster-width: 140px;
+    --hero-poster-width: clamp(160px, 15vw, 210px);
 
     &:hover {
         transform: translateY(-2px);
         box-shadow:
-            0 1px 2px rgba(0, 0, 0, 0.2),
+            0 1px 2px rgba(0, 0, 0, 0.4),
             0 20px 40px -20px
                 var(--app-selection-glow, rgba(120, 173, 255, 0.55));
     }
@@ -124,10 +125,8 @@
     pointer-events: none;
 }
 
-// Layer 1: vignette. Scrim behind the poster card (contrast) and on the
-// right edge (text legibility). Middle stays mostly transparent so the
-// backdrop colours show through. Darkens further when a sharp backdrop is
-// present, since real photography has more focal variation than a blur wash.
+// Layer 1: a dark cinematic scrim keeps provider artwork legible without
+// tinting the whole surface purple.
 .hero__vignette {
     position: absolute;
     inset: 0;
@@ -171,14 +170,14 @@
     background:
         linear-gradient(
             90deg,
-            rgba(0, 0, 0, 0.55) 0%,
-            rgba(0, 0, 0, 0.2) 35%,
-            rgba(0, 0, 0, 0.78) 100%
+            rgba(0, 0, 0, 0.72) 0%,
+            rgba(0, 0, 0, 0.32) 42%,
+            rgba(0, 0, 0, 0.68) 100%
         ),
         linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0) 40%,
-            rgba(0, 0, 0, 0.45) 100%
+            rgba(0, 0, 0, 0.05) 35%,
+            rgba(0, 0, 0, 0.72) 100%
         );
 }
 
@@ -255,13 +254,14 @@
     justify-content: center;
     gap: 6px;
     min-width: 0;
+    max-width: 720px;
 }
 
 .hero__title {
     margin: 6px 0 4px;
-    font-size: 1.75rem;
+    font-size: clamp(2rem, 4vw, 3.35rem);
     font-weight: 600;
-    line-height: 1.15;
+    line-height: 1.06;
     // Display-weight tracking: looser than -0.02em which crushes glyphs at
     // this size (~28px). Matches Apple TV+ "Up Next" card scale.
     letter-spacing: -0.015em;
@@ -280,7 +280,7 @@
 
 .hero__subtitle {
     margin: 0;
-    font-size: 0.88rem;
+    font-size: clamp(0.92rem, 1.4vw, 1.08rem);
     font-weight: 500;
     line-height: 1.45;
     letter-spacing: 0.002em;
@@ -559,17 +559,18 @@
 .rails-page__skeleton-hero {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 160px) minmax(0, 1fr);
-    gap: 24px;
-    padding: 20px;
-    border-radius: 18px;
+    grid-template-columns: minmax(0, 190px) minmax(0, 1fr);
+    gap: 36px;
+    min-height: 360px;
+    padding: 36px;
+    border-radius: 22px;
     background: var(--app-widget-header-bg, #232840);
     border: 1px solid var(--app-widget-header-border, rgba(255, 255, 255, 0.08));
 }
 
 .rails-page__skeleton-hero-poster {
     @extend %skeleton-shimmer;
-    width: 160px;
+    width: 190px;
     aspect-ratio: 2 / 3;
     border-radius: 12px;
     align-self: center;
@@ -668,14 +669,18 @@
         --hero-poster-width: 120px;
         grid-template-columns: var(--hero-poster-width) minmax(0, 1fr);
         gap: 14px;
+        min-height: 250px;
         padding: 14px;
+        border-radius: 16px;
     }
 
     // Skeleton hero mirrors real hero at this breakpoint.
     .rails-page__skeleton-hero {
         grid-template-columns: 120px minmax(0, 1fr);
         gap: 14px;
+        min-height: 250px;
         padding: 14px;
+        border-radius: 16px;
     }
 
     .rails-page__skeleton-hero-poster {

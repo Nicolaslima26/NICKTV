@@ -168,11 +168,9 @@ export class AppComponent implements OnInit {
             });
     }
 
-    /**
-     * Applies the operating system color scheme when no explicit theme is set
-     */
+    /** Applies the ONIXPLUS dark default when no explicit theme is stored. */
     detectDarkMode(): void {
-        this.settingsService.changeTheme(Theme.SystemTheme);
+        this.settingsService.changeTheme(Theme.DarkTheme);
     }
 
     /**
